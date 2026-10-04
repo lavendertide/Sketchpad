@@ -14,8 +14,23 @@ var current_page: Page
 var current_tool: Tool:
 	set(value):
 		current_tool = value
+		update_cursor()
 		tool_changed.emit(value)
 
+func update_cursor() -> void:
+	if project == null:
+		return
+	
+	var cursor = ""
+	if current_tool is Brush:
+		cursor = load("res://tools/brush/brush_crosshair.png")
+	elif current_tool is Eraser:
+		cursor = load("res://tools/eraser/eraser_crosshair.png")
+	elif current_tool is PaintBucket:
+		cursor = load("res://tools/paint_bucket/paint_bucket_crosshair.png")
+	elif current_tool is Dragger:
+		cursor = load("res://tools/dragger/dragger_crosshair.png")
+	Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(16, 16))
 
 func _ready() -> void:
 	canvas.canvas_input.connect(_handle_canvas_input)
@@ -37,6 +52,7 @@ func new_project() -> void:
 ## Loads a provided [param project] into the editor.
 func load_project(p: Project) -> void:
 	project = p
+	update_cursor()
 	page_controls.attach_project(project)
 	canvas.attach_project(project)
 	playback_manager.attach_project(project)

@@ -14,8 +14,11 @@ var current_page: Page
 var current_tool: Tool:
 	set(value):
 		current_tool = value
+		update_cursor()
 		tool_changed.emit(value)
 
+func update_cursor() -> void:
+	pass
 
 func _ready() -> void:
 	canvas.canvas_input.connect(_handle_canvas_input)

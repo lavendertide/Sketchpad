@@ -21,6 +21,15 @@ func update_cursor() -> void:
 	if current_tool is Brush:
 		var cursor = load("res://tools/brush/brush_crosshair.png")
 		Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(16, 16))
+	elif current_tool is Eraser:
+		var cursor = load("res://tools/eraser/eraser_crosshair.png")
+		Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(16, 16))
+	elif current_tool is PaintBucket:
+		var cursor = load("res://tools/paint_bucket/paint_bucket_crosshair.png")
+		Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(16, 16))
+	elif current_tool is Dragger:
+		var cursor = load("res://tools/dragger/dragger_crosshair.png")
+		Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(16, 16))
 
 func _ready() -> void:
 	canvas.canvas_input.connect(_handle_canvas_input)

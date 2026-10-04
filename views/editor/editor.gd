@@ -18,7 +18,9 @@ var current_tool: Tool:
 		tool_changed.emit(value)
 
 func update_cursor() -> void:
-	pass
+	if current_tool is Brush:
+		var cursor = load("res://tools/brush/brush_crosshair.png")
+		Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(16, 16))
 
 func _ready() -> void:
 	canvas.canvas_input.connect(_handle_canvas_input)
